@@ -1,9 +1,9 @@
 // ex1. Tạo một mảng mới chứa các số lớn hơn 5 từ mảng ban đầu (map).
 const func1 = (...arr) => {
     const newArray = arr.filter(n => n > 5);
-    // ta truyền 1 hàm call back vào filter() như là đối số, phương thức filter() của mảng JS được sử dụng 
-    // để TẠO 1 MẢNG MỚI chứa các phần tử thỏa mãn 1 điều kiện nhất định    
-    return `EX1 - Mảng chứa các số lơn hơn 5: `  + newArray
+    // ta truyền 1 hàm call back vào filter() như là đối số, phương thức filter() của mảng JS được sử dụng
+    // để TẠO 1 MẢNG MỚI chứa các phần tử thỏa mãn 1 điều kiện nhất định
+    return `EX1 - Mảng chứa các số lơn hơn 5: ` + newArray
 }
 console.log(func1([2, 8, 5, 9, 10, 3, 11]));
 
@@ -13,8 +13,8 @@ console.log(func1([2, 8, 5, 9, 10, 3, 11]));
 // ex2. Sử dụng arrow function và reduce để tính tổng các phần tử trong mảng.
 const func2 = (...arr) => {
     const sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    // Phương thức reduce() là một phương thức của mảng trong JavaScript, 
-    // được sử dụng để thực hiện 1 PHÉP TÍCH LŨY trên các phần tử của mảng 
+    // Phương thức reduce() là một phương thức của mảng trong JavaScript,
+    // được sử dụng để thực hiện 1 PHÉP TÍCH LŨY trên các phần tử của mảng
     // và trả về 1 GIÁ TRỊ DUY NHẤT.
     return (`EX2 - Tổng các phần tử trong mảng: ` + sum);
 }
@@ -24,9 +24,9 @@ console.log(func2([1, 2, 3, 4, 5]));
 // ------------------------------------------------------END-------------------------------------------------------
 
 // ex3. Kiểm tra 1 mảng có chứa số V hay không nếu có trả về V không thì trả về "không tìm thấy" (some).
-const func3  = (targetNumber) => {
+const func3 = (targetNumber) => {
     const arrV = [1, 2, 3, 4, 5];
-    const result =  arrV.some(n => n === targetNumber);
+    const result = arrV.some(n => n === targetNumber);
     // Chúng ta sử TOÁN TỬ 3 NGÔI để kiểm tra kết quả của some()
     return result ? (`EX3 - Đã tìm thấy số ` + targetNumber) : `Không tìm thấy !`
 }
@@ -37,7 +37,7 @@ console.log(func3(3));
 // ex4. Kiểm tra 1 mảng tất cả các phần tử trong mảng đó có lớn hơn 0 hay không? (every).
 const func4 = (...arr) => {
     const n = arr.every(number => number > 0);
-    // Phương thức every() trong JavaScript được sử dụng để kiểm tra xem TẤT CẢ các phần tử trong một mảng 
+    // Phương thức every() trong JavaScript được sử dụng để kiểm tra xem TẤT CẢ các phần tử trong một mảng
     // có thỏa mãn một điều kiện nhất định hay không
     return `EX4 - Các phần tử trong mảng > 0 : ` + n;
 }
@@ -57,10 +57,10 @@ console.log(func5([-2, 3, 8, 10]));
 
 // ex6. Sử dụng destructuring với rest parameter để trích xuất phần tử đầu tiên vào biến "first" và các phần tử còn lại vào một mảng mới "rest".
 const func6 = (...arr) => {
-    const [first, ...rest] = arr;   
-    return `EX6 - biến first: ` +  first + ` Mảng rest: ` + rest;
+    const [first, ...rest] = arr;
+    return `EX6 - biến first: ` + first + ` Mảng rest: ` + rest;
 }
-console.log(func6(1,2,3,4,5));
+console.log(func6(1, 2, 3, 4, 5));
 
 // ------------------------------------------------------END-------------------------------------------------------
 
@@ -80,13 +80,13 @@ const person = [
     }
 ];
 
-const func7 = person.map(({name, age}) => `Name: ${name}, Age: ${age}`);
+const func7 = person.(({name, age}) => `Name: ${name}, Age: ${age}`);
 console.log(`EX7 - Mảng đã trích xuất ` + func7);
 
 // ------------------------------------------------------END-------------------------------------------------------
 
 // ex8. Sử dụng Rest parameter và Spread operator để tạo một hàm nhận vào danh sách các số và trả về tổng của chúng.
-const func8 = (...numbers) => numbers.reduce((sum, n) => sum + n ,0);
+const func8 = (...numbers) => numbers.reduce((sum, n) => sum + n, 0);
 console.log(`EX8 - Tổng = ` + func8(1, 2, 3, 4, 5));
 
 // ------------------------------------------------------END-------------------------------------------------------
@@ -99,25 +99,17 @@ console.log(`EX9 - Chuỗi định dạng: ${func9('Minh', 'Nhi', 'Ngoc', 'Vy')}
 // ------------------------------------------------------END-------------------------------------------------------
 
 // ex10. Tạo một đối tượng "book" với thuộc tính "title", "author" và "pages" bằng cách sử dụng Enhanced object literals. Đối tượng "book" cũng có phương thức "displayInfo" để in ra thông tin về sách.
+var title = 'ABC';
+var author = 'Nguyen H';
+var pages = 133;
+
+
 const book = {
-    displayInfo(title, author, pages){
-        console.log(`EX10 - BOOK`);
-        console.log(`Title: ${title}`);
-        console.log(`Author: ${author}`);
-        console.log(`Pages: ${pages}`);
+    title, author, pages,
+    displayInfo() {
+        console.log(this.title);
+        console.log(this.author);
+        console.log(this.pages);
     }
 };
-book.displayInfo('Hoàng hôn', 'Zhang Ming', 319);
-
-
-
-
-
-
-
-
-
-
-
-
-
+book.displayInfo();
