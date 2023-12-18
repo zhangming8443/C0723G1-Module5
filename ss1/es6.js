@@ -80,7 +80,7 @@ const person = [
     }
 ];
 
-const func7 = person.(({name, age}) => `Name: ${name}, Age: ${age}`);
+const func7 = person.map(({name, age}) => `Name: ${name}, Age: ${age}`);
 console.log(`EX7 - Mảng đã trích xuất ` + func7);
 
 // ------------------------------------------------------END-------------------------------------------------------
