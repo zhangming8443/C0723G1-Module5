@@ -41,8 +41,8 @@ const students = [
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div>
-        {students.map(student => (
-          <tr>
+        {students.map((student, index) => (
+          <tr key={index}>
             <td>{student.company}</td>
             <td>{student.contact}</td>
             <td>{student.country}</td>
