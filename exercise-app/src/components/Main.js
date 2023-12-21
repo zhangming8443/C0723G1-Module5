@@ -181,6 +181,19 @@ export default function Main() {
                         </div>
                     </div>
                 </div>
+                <div className="col-sm-2">
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Exercise 5.2</h5>
+                            <p className="card-text">Tạo form khai báo y tế (with validate).</p>
+                            <Link to="/exercise-5.2">
+                                <button className="btn btn-primary">
+                                    Click here
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -22,6 +22,7 @@ import Router1 from "./components/ss5/practice/router1/Router1";
 import Category from "./components/ss5/practice/router2/Category";
 import Product from "./components/ss5/practice/router2/Product";
 import ContactForm from "./components/ss5/exercise/contact-form/ContactForm";
+import MedicalDeclaration from "./components/ss5/exercise/medical-declaration-form/MedicalDeclaration";
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/practice-5.6" element={<Category/>}/>
                 <Route path="/product/:categoryId" element={<Product/>}/>
                 <Route path="/exercise-5.1" element={<ContactForm/>}/>
+                <Route path="/exercise-5.2" element={<MedicalDeclaration/>}/>
             </Routes>
 
         </div>

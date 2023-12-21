@@ -1,20 +1,29 @@
-import React, {useState} from 'react';
-import './MedicalDeclaration.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import {Formik} from "formik";
+// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-grid.css';
+import './MedicalDeclaration.css'
+
+import {Formik, Field, Form, ErrorMessage} from "formik";
+import * as Yup from "yup";
+import {useState} from "react";
+
 
 export default function MedicalDeclaration() {
 
-    const MESSAGE_ERROR = {
-        fullName: 'Required',
-        idCard: 'Required',
-        dateOfBirth: 'Required',
-        nationality: 'Required',
-        province: 'Required',
-        district: 'Required',
-        apartmentNumber: 'Required',
-        phone: 'Required',
-        email: 'Required'
+    const initialValues = {
+        fullName: '',
+        idCard: '',
+        dateOfBirth: '',
+        gender: null,
+        nationality: '',
+        workPlace: '',
+        jobPosition: '',
+        healthInsurance: 1,
+        province: '',
+        district: '',
+        wards: '',
+        apartmentNumber: '',
+        phone: '',
+        email: ''
     }
 
     const SEX_LIST = [
@@ -28,69 +37,147 @@ export default function MedicalDeclaration() {
         }
     ]
 
-    const [form, setForm] = useState({});
-
-
-    const REGEX = {
-        email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-    };
-
+    const [form, setForm] = useState(initialValues);
 
     const handleChange = (event) => {
-        const value = event.target.type === 'checkbox' ? !form[event.target.name] : event.target.value;
+        const {name, value} = event.target;
+        setForm((prevForm) => ({
+            ...prevForm,
+            [name]: value,
+        }));
+    };
 
-        setForm({...form, [event.target.name]: event.target.value});
+    const validator = {
+        fullName: Yup.string().required("Không được để trống"),
+        idCard: Yup.string().required("Không được để trống"),
+        dateOfBirth: Yup.date().required("Không được để trống").min(new Date(1900, 0, 1), 'Năm sinh không hợp lệ'),
+        nationality: Yup.string().required("Không được để trống"),
+        province: Yup.string().required("Không được để trống"),
+        district: Yup.string().required("Không được để trống"),
+        wards: Yup.string().required("Không được để trống"),
+        apartmentNumber: Yup.string().required("Không được để trống"),
+        phone: Yup.string().required("Không được để trống"),
+        email: Yup.string().required("Không được để trống").matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, "Email không hợp lệ")
     }
 
-    function handleValidate() {
-        const errors = {};
-        if (!form.fullName) {
-            errors.fullName = MESSAGE_ERROR.fullName;
-        }
-
-        if (!form.idCard) {
-            errors.idCard = MESSAGE_ERROR.idCard;
-        }
-
-        if (!form.dateOfBirth) {
-            errors.dateOfBirth = MESSAGE_ERROR.dateOfBirth;
-        } else {
-            const date = new Date(form.dateOfBirth);
-            if (date.getFullYear() < 1900) {
-                errors.dateOfBirth = "Invalid date";
-            }
-        }
-
-        if (!form.nationality) {
-            errors.nationality = MESSAGE_ERROR.nationality;
-        }
-
-        if (!form.province) {
-            errors.province = MESSAGE_ERROR.province;
-        }
-
-        if (!form.district) {
-            errors.district = MESSAGE_ERROR.district;
-        }
-
-        if (!form.apartmentNumber) {
-            errors.apartmentNumber = MESSAGE_ERROR.apartmentNumber;
-        }
-
-        if (!form.phone) {
-            errors.phone = MESSAGE_ERROR.phone;
-        }
-
-
-        if (!form.email) {
-            errors.email = "Required";
-        } else if (!REGEX.email.test(form.email)) {
-            errors.email = "Invalid email address";
-        }
+    const handleSubmit = () => {
+        alert("Khai báo thành công !!!");
     }
 
-    function handleSubmit() {
-        alert("Declared successfully!!!");
-    }
 
+    return (
+        <div className="container-fluid">
+            <h1>Tờ khai báo ý tế</h1>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={Yup.object(validator)}
+                onSubmit={handleSubmit}>
+                <Form>
+
+                    <div>
+
+                        <label>Họ tên</label>
+                        <Field id="fullName" type="text" name="fullName"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="fullName"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Số hộ chiếu /CMND</label>
+                        <Field id="idCard" type="text" name="idCard"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="idCard"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Năm sinh</label>
+                        <Field id="dateOfBirth" type="date" name="dateOfBirth"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="dateOfBirth"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Giới tính</label>
+                        {SEX_LIST.map((option) => (
+                            <label key={option.value}>
+                                <Field
+                                    type="radio"
+                                    name="gender"
+                                    value={option.value}
+                                    checked={form.gender === option.value}
+                                    onChange={handleChange}
+                                />
+                                {option.label}
+                            </label>
+                        ))}
+                    </div>
+                    <div>
+                        <label>Quốc tịch</label>
+                        <Field id="nationality" type="text" name="nationality"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="nationality"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Công ty làm việc</label>
+                        <Field id="workPlace" type="text" name="workPlace"/>
+                    </div>
+                    <div>
+                        <label>Bộ phận làm việc</label>
+                        <Field id="jobPosition" type="text" name="jobPosition"/>
+                    </div>
+                    <div>
+                        <label>Có thẻ bảo hiểm y tế</label>
+                        <Field id="healthInsurance" value="1" type="checkbox" name="healthInsurance"/>
+                    </div>
+                    <h3>Địa chỉ liên lạc tại Việt Nam</h3>
+                    <div>
+                        <label>Tỉnh thành</label>
+                        <Field id="province" type="text" name="province"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="province"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Quận /huyện</label>
+                        <Field id="district" type="text" name="district"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="district"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Phường /xã</label>
+                        <Field id="wards" type="text" name="wards"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="wards"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Số nhà, phố, tổ dân phố /thôn /đội</label>
+                        <Field id="apartmentNumber" type="text" name="apartmentNumber"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="apartmentNumber"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Điện thoại</label>
+                        <Field id="phone" type="text" name="phone"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="phone"/>
+                        </span>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <Field id="email" type="text" name="email"/>
+                        <span className="text-danger">
+                            <ErrorMessage name="email"/>
+                        </span>
+                    </div>
+
+
+                    <button type="submit">Xác nhận</button>
+                </Form>
+            </Formik>
+        </div>
+    );
 }
