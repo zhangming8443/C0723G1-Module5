@@ -31,7 +31,6 @@ export default function ContactForm() {
             errors.email = "Required";
         } else if (!REGEX.email.test(form.email)) {
             errors.email = "Invalid email address";
-            console.log("code");
         }
         if (!form.fullName) {
             errors.fullName = "Required";
