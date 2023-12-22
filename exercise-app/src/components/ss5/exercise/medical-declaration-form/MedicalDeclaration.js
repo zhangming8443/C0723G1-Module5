@@ -48,16 +48,16 @@ export default function MedicalDeclaration() {
     };
 
     const validator = {
-        fullName: Yup.string().required("Không được để trống"),
-        idCard: Yup.string().required("Không được để trống"),
-        dateOfBirth: Yup.date().required("Không được để trống").min(new Date(1900, 0, 1), 'Năm sinh không hợp lệ'),
-        nationality: Yup.string().required("Không được để trống"),
-        province: Yup.string().required("Không được để trống"),
-        district: Yup.string().required("Không được để trống"),
-        wards: Yup.string().required("Không được để trống"),
-        apartmentNumber: Yup.string().required("Không được để trống"),
-        phone: Yup.string().required("Không được để trống"),
-        email: Yup.string().required("Không được để trống").matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, "Email không hợp lệ")
+        fullName: Yup.string().required("Tên không được để trống"),
+        idCard: Yup.string().required("Số nhà, phố, tổ dân phố /thôn /đội không được để trống"),
+        dateOfBirth: Yup.date().required("Năm sinh không được để trống").min(new Date(1900, 0, 1), 'Năm sinh không hợp lệ'),
+        nationality: Yup.string().required("Quốc tịch không được để trống"),
+        province: Yup.string().required("Tỉnh /thành không được để trống"),
+        district: Yup.string().required("Quận /huyện không được để trống"),
+        wards: Yup.string().required("Phường /xã không được để trống"),
+        apartmentNumber: Yup.string().required("Địa chỉ không được để trống"),
+        phone: Yup.string().required("Số điện thoại không được để trống"),
+        email: Yup.string().required("Email không được để trống").matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, "Email không hợp lệ")
     }
 
     const handleSubmit = () => {

@@ -28,19 +28,19 @@ export default function ContactForm() {
     function handleValidate() {
         const errors = {};
         if (!form.email) {
-            errors.email = "Required";
+            errors.email = "Email is required";
         } else if (!REGEX.email.test(form.email)) {
             errors.email = "Invalid email address";
             console.log("code");
         }
         if (!form.fullName) {
-            errors.fullName = "Required";
+            errors.fullName = "Full name is required";
         }
         if (!form.phone) {
-            errors.phone = "Required";
+            errors.phone = "Phone number is required";
         }
         if (!form.message) {
-            errors.message = "Required";
+            errors.message = "Message is required";
         }
         return errors;
     }
